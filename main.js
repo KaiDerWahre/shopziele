@@ -427,4 +427,7 @@ submitButton.addEventListener('click', function() {
     const employeesTableTitleFinal = document.getElementById('final-table-lable');
     employeesTableTitleFinal.innerHTML = "Final Table";
     employeesTableFinal.innerHTML = tableFinalHeader + tableRowsFinal;
+    
+    var printButton = document.getElementById('export-btn');
+    printButton.removeAttribute("hidden");
 });
