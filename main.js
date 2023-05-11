@@ -24,7 +24,7 @@ function generateEmployeeForm(employees) {
   
     employees.forEach(function(employee) {
       html += `<div>
-                  <h3 class="collapsable" for="${employee}">${employee}</h3>
+                  <h3 class="name-label" for="${employee}">${employee}</h3>
                   <div id="${employee}-textboxes" class="textboxes-group">
                       <div>
                           <label for="${employee}_days">Tage:</label>
@@ -117,6 +117,7 @@ var addMemberButton = document.getElementById('add-member');
 var memberAttributes = document.getElementById('member-attributes');
 var submitButton = document.getElementById('submit-member-attributes');
 var memberNames = [];
+
 
 // adds user input to memberContainer
 addMemberButton.addEventListener('click', function() {
@@ -427,7 +428,7 @@ submitButton.addEventListener('click', function() {
     const employeesTableTitleFinal = document.getElementById('final-table-lable');
     employeesTableTitleFinal.innerHTML = "Final Table";
     employeesTableFinal.innerHTML = tableFinalHeader + tableRowsFinal;
-    
+
     var printButton = document.getElementById('export-btn');
     printButton.removeAttribute("hidden");
 });
