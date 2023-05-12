@@ -330,10 +330,10 @@ submitButton.addEventListener('click', function() {
         <th>Ü35</th>
         <th>U35</th>
         <th>Ziel FN</th>
-        <th>Festnetz</th>
+        <th>FN</th>
         <th>Ziel TV</th>
-        <th>Tv</th>
-        <th>Ziel Vvl</th>
+        <th>TV</th>
+        <th>Ziel VVL</th>
         <th>VVL</th>
         <th>Ziel WB/Upsell</th>
         <th>WB/Upsell</th>
@@ -451,7 +451,7 @@ submitButton.addEventListener('click', function() {
     // Set table header and rows
     const employeesTableFinal = document.getElementById('final-table');
     const employeesTableTitleFinal = document.getElementById('final-table-lable');
-    employeesTableTitleFinal.innerHTML = "Final Table";
+    employeesTableTitleFinal.innerHTML = "Komplette Tabelle";
     employeesTableFinal.innerHTML = tableFinalHeader + tableRowsFinal;
 
     var printButton = document.getElementById('export-btn');
