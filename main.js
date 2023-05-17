@@ -33,7 +33,7 @@ function generateEmployeeForm(employees) {
                           <input type="number" id="${employee}_days" name="${employee}_days" step="0.1" required>
                       </div>
                       <div>
-                          <label for="${employee}_hours">Hours:</label>
+                          <label for="${employee}_hours">Stunden:</label>
                           <br>
                           <input type="number" id="${employee}_hours" name="${employee}_hours" step="0.1" required>
                       </div>
