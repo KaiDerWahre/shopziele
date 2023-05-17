@@ -95,8 +95,8 @@
         margin: [30, 10, 30, 10],
         filename: 'table.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, logging: true, dpi: 192 },
-        jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape', putOnlyUsedFonts:true },
+        html2canvas: { scale: 2, logging: true, dpi: 192, width: 1130 },
+        jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' },
     }).save();
   });
 </script>
