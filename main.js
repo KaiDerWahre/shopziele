@@ -1,7 +1,8 @@
 class Member {
-    constructor(name, days, u35_goal, ue35_goal, wb_goal, tv_goal, vvl_goal, fn_goal, u35_reached, ue35_reached, wb_reached, tv_reached, vvl_reached, fn_reached) {
+    constructor(name, days, hours, u35_goal, ue35_goal, wb_goal, tv_goal, vvl_goal, fn_goal, u35_reached, ue35_reached, wb_reached, tv_reached, vvl_reached, fn_reached) {
         this.name = name;
         this.days = days;
+        this.hours = hours;
         this.u35_goal = u35_goal;
         this.ue35_goal = ue35_goal;
         this.wb_goal = wb_goal;
@@ -30,6 +31,11 @@ function generateEmployeeForm(employees) {
                           <label for="${employee}_days">Tage:</label>
                           <br>
                           <input type="number" id="${employee}_days" name="${employee}_days" step="0.1" required>
+                      </div>
+                      <div>
+                          <label for="${employee}_hours">Hours:</label>
+                          <br>
+                          <input type="number" id="${employee}_hours" name="${employee}_hours" step="0.1" required>
                       </div>
                       <div>
                           <label for="${employee}_u35">U35:</label>
@@ -68,8 +74,8 @@ function generateEmployeeForm(employees) {
 }
 
 // goal for each member based on days
-function calculatePersonalGoal(number, days, allDays) {
-    var percentage = days / allDays;
+function calculatePersonalGoal(number, hours, allHours) {
+    var percentage = hours / allHours;
     return number * percentage;
 }
 
@@ -190,11 +196,17 @@ submitButton.addEventListener('click', function() {
     vvl_total_goal = Number(document.getElementById('vvl-goal').value);
     fn_total_goal = Number(document.getElementById('fn-goal').value);
     
-    // calculate member's total days since we need it to calculate the personal goal
+    // calculate member's total days and hours since we need it to calculate the personal goal
     totalDays = 0;
+    totalHours = 0;
     memberNames.forEach(function(member) {
         var daysInput = document.getElementById(member + '_days');
         var days = Number(daysInput.value);
+
+        var hoursInput = document.getElementById(member + '_hours');
+        var hours = Number(hoursInput.value) * days;
+
+        totalHours += hours;
         totalDays += days;
     });
         
@@ -203,19 +215,23 @@ submitButton.addEventListener('click', function() {
     memberNames.forEach(function(member) {
         var daysInput = document.getElementById(member + '_days');
         var days = Number(daysInput.value);
-        var u35_goal = calculatePersonalGoal(u35_total_goal, days, totalDays);
-        var ue35_goal = calculatePersonalGoal(ue35_total_goal, days, totalDays);
-        var wb_goal = calculatePersonalGoal(wb_total_goal, days, totalDays);
-        var tv_goal = calculatePersonalGoal(tv_total_goal, days, totalDays);
-        var vvl_goal = calculatePersonalGoal(vvl_total_goal, days, totalDays);
-        var fn_goal = calculatePersonalGoal(fn_total_goal, days, totalDays);
+
+        var hoursInput = document.getElementById(member + '_hours');
+        var hours = Number(hoursInput.value) * days;
+
+        var u35_goal = calculatePersonalGoal(u35_total_goal, hours, totalHours);
+        var ue35_goal = calculatePersonalGoal(ue35_total_goal, hours, totalHours);
+        var wb_goal = calculatePersonalGoal(wb_total_goal, hours, totalHours);
+        var tv_goal = calculatePersonalGoal(tv_total_goal, hours, totalHours);
+        var vvl_goal = calculatePersonalGoal(vvl_total_goal, hours, totalHours);
+        var fn_goal = calculatePersonalGoal(fn_total_goal, hours, totalHours);
         var u35_reached = Number(document.getElementById(member + '_u35').value);
         var ue35_reached = Number(document.getElementById(member + '_ue35').value);
         var wb_reached = Number(document.getElementById(member + '_wb').value);
         var tv_reached = Number(document.getElementById(member + '_tv').value);
         var vvl_reached = Number(document.getElementById(member + '_vvl').value);
         var fn_reached = Number(document.getElementById(member + '_fn').value);
-        var memberObj = new Member(member, days, u35_goal, ue35_goal, wb_goal, tv_goal, vvl_goal, fn_goal, u35_reached, ue35_reached, wb_reached, tv_reached, vvl_reached, fn_reached);
+        var memberObj = new Member(member, days, Number(hoursInput.value), u35_goal, ue35_goal, wb_goal, tv_goal, vvl_goal, fn_goal, u35_reached, ue35_reached, wb_reached, tv_reached, vvl_reached, fn_reached);
         members.push(memberObj);
     });
 
@@ -225,6 +241,7 @@ submitButton.addEventListener('click', function() {
         <tr>
             <th>Name</th>
             <th>Tage</th>
+            <th>Stunden</th>
             <th>U35</th>
             <th>Ü35</th>
             <th>WB</th>
@@ -241,6 +258,7 @@ submitButton.addEventListener('click', function() {
             <tr>
                 <td>${member.name}</td>
                 <td>${member.days}</td>
+                <td>${member.hours}</td>
                 <td>${roundToTwoDecimals(member.u35_goal)}</td>
                 <td>${roundToTwoDecimals(member.ue35_goal)}</td>
                 <td>${roundToTwoDecimals(member.wb_goal)}</td>
@@ -305,6 +323,7 @@ submitButton.addEventListener('click', function() {
             <tr>
                 <td>${member.name}</td>
                 <td>${member.days}</td>
+                <td>${member.hours}</td>
                 <td>${member.u35_goal}</td>
                 <td>${member.ue35_goal}</td>
                 <td>${member.wb_goal}</td>
@@ -325,6 +344,7 @@ submitButton.addEventListener('click', function() {
     const tableFinalHeader = `<tr>
         <th></th>
         <th>Tage</th>
+        <th>Stunden</th>
         <th>Ziel Ü35</th>
         <th>Ziel U35</th>
         <th>Ü35</th>
@@ -352,6 +372,7 @@ submitButton.addEventListener('click', function() {
         const row = `<tr>
             <td>${member.name}</td>
             <td>${member.days}</td>
+            <td>${member.hours}</td>
             <td>${member.ue35_goal}</td>
             <td>${member.u35_goal}</td>
             <td>${member.ue35_reached}</td>
@@ -380,6 +401,7 @@ submitButton.addEventListener('click', function() {
     tableRowsFinal += `<tr>
         <td>${"Shop (erreicht)"}</td>
         <td>${totalDays}</td>
+        <td>${totalHours}</td>
         <td>${totalColumn(array_ue35_goal_rounded)}</td>
         <td>${totalColumn(array_u35_goal_rounded)}</td>
         <td>${total_ue35_reached}</td>
@@ -397,7 +419,8 @@ submitButton.addEventListener('click', function() {
     // difference
     tableRowsFinal += `<tr>
         <td>${"Differenz"}</td>
-        <td>${""}</td>
+        <td>${"/"}</td>
+        <td>${"/"}</td>
         <td>${"/"}</td>
         <td>${"/"}</td>
         <td>${-(ue35_total_goal - total_ue35_reached)}</td>
@@ -415,7 +438,8 @@ submitButton.addEventListener('click', function() {
     // reached
     tableRowsFinal += `<tr>
         <td>${"erreicht"}</td>
-        <td>${""}</td>
+        <td>${"/"}</td>
+        <td>${"/"}</td>
         <td>${"/"}</td>
         <td>${"/"}</td>
         <td>${Math.round(total_ue35_reached / ue35_total_goal * 100) +"%"}</td>
@@ -433,7 +457,8 @@ submitButton.addEventListener('click', function() {
     // increase/loss
     tableRowsFinal += `<tr>
         <td>${"Steigerung/Verlust"}</td>
-        <td>${""}</td>
+        <td>${"/"}</td>
+        <td>${"/"}</td>
         <td>${"/"}</td>
         <td>${"/"}</td>
         <td>${Math.round(-(ue35_total_goal - total_ue35_reached) / ue35_total_goal * 100) +"%"}</td>
