@@ -30,42 +30,42 @@ function generateEmployeeForm(employees) {
                       <div>
                           <label for="${employee}_days">Tage:</label>
                           <br>
-                          <input type="number" id="${employee}_days" name="${employee}_days" step="0.1" required min="0" oninput="validity.valid||(value='');">
+                          <input type="number" id="${employee}_days" name="${employee}_days" step="0.1" required>
                       </div>
                       <div>
                           <label for="${employee}_hours">Stunden pro Tag:</label>
                           <br>
-                          <input type="number" id="${employee}_hours" name="${employee}_hours" step="0.1" required min="0" oninput="validity.valid||(value='');">
-                      </div>
-                      <div>
-                          <label for="${employee}_u35">U35:</label>
-                          <br>
-                          <input type="number" id="${employee}_u35" name="${employee}_u35" min="0" oninput="validity.valid||(value='');">
+                          <input type="number" id="${employee}_hours" name="${employee}_hours" step="0.1" required>
                       </div>
                       <div>
                           <label for="${employee}_ue35">Ü35:</label>
                           <br>
-                          <input type="number" id="${employee}_ue35" name="${employee}_ue35" min="0" oninput="validity.valid||(value='');">
+                          <input type="number" id="${employee}_ue35" name="${employee}_ue35">
                       </div>
                       <div>
-                          <label for="${employee}_wb">WB:</label>
+                          <label for="${employee}_u35">U35:</label>
                           <br>
-                          <input type="number" id="${employee}_wb" name="${employee}_wb" min="0" oninput="validity.valid||(value='');">
-                      </div>
-                      <div>
-                          <label for="${employee}_tv">TV:</label>
-                          <br>
-                          <input type="number" id="${employee}_tv" name="${employee}_tv" min="0" oninput="validity.valid||(value='');">
-                      </div>
-                      <div>
-                          <label for="${employee}_vvl">VVL:</label>
-                          <br>
-                          <input type="number" id="${employee}_vvl" name="${employee}_vvl" min="0" oninput="validity.valid||(value='');">
+                          <input type="number" id="${employee}_u35" name="${employee}_u35">
                       </div>
                       <div>
                           <label for="${employee}_fn">FN:</label>
                           <br>
-                          <input type="number" id="${employee}_fn" name="${employee}_fn" min="0" oninput="validity.valid||(value='');">
+                          <input type="number" id="${employee}_fn" name="${employee}_fn">
+                      </div>
+                      <div>
+                          <label for="${employee}_tv">TV:</label>
+                          <br>
+                          <input type="number" id="${employee}_tv" name="${employee}_tv">
+                      </div>
+                      <div>
+                          <label for="${employee}_vvl">VVL:</label>
+                          <br>
+                          <input type="number" id="${employee}_vvl" name="${employee}_vvl">
+                      </div>
+                      <div>
+                          <label for="${employee}_wb">WB:</label>
+                          <br>
+                          <input type="number" id="${employee}_wb" name="${employee}_wb">
                       </div>
                   </div>
               </div>`;
@@ -172,22 +172,6 @@ addMemberButton.addEventListener('click', function() {
 });
 
 submitButton.addEventListener('click', function() {
-    // add all variables
-    u35_total_goal = Number(document.getElementById('u35-goal').value);
-    ue35_total_goal = Number(document.getElementById('ue35-goal').value);
-    wb_total_goal = Number(document.getElementById('wb-goal').value);
-    tv_total_goal = Number(document.getElementById('tv-goal').value);
-    vvl_total_goal = Number(document.getElementById('vvl-goal').value);
-    fn_total_goal = Number(document.getElementById('fn-goal').value);
-
-    // calculate member's total days since we need it to calculate the personal goal
-    totalDays = 0;
-    memberNames.forEach(function(member) {
-        var daysInput = document.getElementById(member + '_days');
-        var days = Number(daysInput.value);
-        totalDays += days;
-    });
-    
     // getting goal variables from user input
     u35_total_goal = Number(document.getElementById('u35-goal').value);
     ue35_total_goal = Number(document.getElementById('ue35-goal').value);
@@ -242,12 +226,12 @@ submitButton.addEventListener('click', function() {
             <th>Name</th>
             <th>Tage</th>
             <th>Stunden</th>
-            <th>U35</th>
             <th>Ü35</th>
-            <th>WB</th>
+            <th>U35</th>
+            <th>FN</th>
             <th>TV</th>
             <th>VVL</th>
-            <th>FN</th>
+            <th>WB</th>
         </tr>
     `;
 
@@ -258,13 +242,13 @@ submitButton.addEventListener('click', function() {
             <tr>
                 <td>${member.name}</td>
                 <td>${member.days}</td>
-                <td>${member.hours * member.days}</td>
-                <td>${roundToTwoDecimals(member.u35_goal)}</td>
+                <td>${roundToTwoDecimals(member.hours * member.days)}</td>
                 <td>${roundToTwoDecimals(member.ue35_goal)}</td>
-                <td>${roundToTwoDecimals(member.wb_goal)}</td>
+                <td>${roundToTwoDecimals(member.u35_goal)}</td>
+                <td>${roundToTwoDecimals(member.fn_goal)}</td>
                 <td>${roundToTwoDecimals(member.tv_goal)}</td>
                 <td>${roundToTwoDecimals(member.vvl_goal)}</td>
-                <td>${roundToTwoDecimals(member.fn_goal)}</td>
+                <td>${roundToTwoDecimals(member.wb_goal)}</td>
             </tr>
         `;
     basicTableRows += row; 
@@ -323,13 +307,13 @@ submitButton.addEventListener('click', function() {
             <tr>
                 <td>${member.name}</td>
                 <td>${member.days}</td>
-                <td>${member.hours * member.days}</td>
-                <td>${member.u35_goal}</td>
+                <td>${roundToTwoDecimals(member.hours * member.days)}</td>
                 <td>${member.ue35_goal}</td>
-                <td>${member.wb_goal}</td>
+                <td>${member.u35_goal}</td>
+                <td>${member.fn_goal}</td>
                 <td>${member.tv_goal}</td>
                 <td>${member.vvl_goal}</td>
-                <td>${member.fn_goal}</td>
+                <td>${member.wb_goal}</td>
             </tr>
         `;
     basicTableRoundedRows += row; 
@@ -346,8 +330,8 @@ submitButton.addEventListener('click', function() {
         <th>Tage</th>
         <th>Stunden</th>
         <th>Ziel Ü35</th>
-        <th>Ziel U35</th>
         <th>Ü35</th>
+        <th>Ziel U35</th>
         <th>U35</th>
         <th>Ziel FN</th>
         <th>FN</th>
@@ -372,10 +356,10 @@ submitButton.addEventListener('click', function() {
         const row = `<tr>
             <td>${member.name}</td>
             <td>${member.days}</td>
-            <td>${member.hours * member.days}</td>
+            <td>${roundToTwoDecimals(member.hours * member.days)}</td>
             <td>${member.ue35_goal}</td>
-            <td>${member.u35_goal}</td>
             <td>${member.ue35_reached}</td>
+            <td>${member.u35_goal}</td>
             <td>${member.u35_reached}</td>
             <td>${member.fn_goal}</td>
             <td>${member.fn_reached}</td>
@@ -400,11 +384,11 @@ submitButton.addEventListener('click', function() {
     // shop (reached)
     tableRowsFinal += `<tr>
         <td>${"Shop (erreicht)"}</td>
-        <td>${totalDays}</td>
-        <td>${totalHours}</td>
+        <td>${roundToTwoDecimals(totalDays)}</td>
+        <td>${roundToTwoDecimals(totalHours)}</td>
         <td>${totalColumn(array_ue35_goal_rounded)}</td>
-        <td>${totalColumn(array_u35_goal_rounded)}</td>
         <td>${total_ue35_reached}</td>
+        <td>${totalColumn(array_u35_goal_rounded)}</td>
         <td>${total_u35_reached}</td>
         <td>${totalColumn(array_fn_goal_rounded)}</td>
         <td>${total_fn_reached}</td>
@@ -422,8 +406,8 @@ submitButton.addEventListener('click', function() {
         <td>${"/"}</td>
         <td>${"/"}</td>
         <td>${"/"}</td>
-        <td>${"/"}</td>
         <td>${-(ue35_total_goal - total_ue35_reached)}</td>
+        <td>${"/"}</td>
         <td>${-(u35_total_goal - total_u35_reached)}</td>
         <td>${"/"}</td>
         <td>${-(fn_total_goal - total_fn_reached)}</td>
@@ -441,8 +425,8 @@ submitButton.addEventListener('click', function() {
         <td>${"/"}</td>
         <td>${"/"}</td>
         <td>${"/"}</td>
-        <td>${"/"}</td>
         <td>${Math.round(total_ue35_reached / ue35_total_goal * 100) +"%"}</td>
+        <td>${"/"}</td>
         <td>${Math.round(total_u35_reached / u35_total_goal * 100) +"%"}</td>
         <td>${"/"}</td>
         <td>${Math.round(total_fn_reached / fn_total_goal * 100) +"%"}</td>
@@ -460,8 +444,8 @@ submitButton.addEventListener('click', function() {
         <td>${"/"}</td>
         <td>${"/"}</td>
         <td>${"/"}</td>
-        <td>${"/"}</td>
         <td>${Math.round(-(ue35_total_goal - total_ue35_reached) / ue35_total_goal * 100) +"%"}</td>
+        <td>${"/"}</td>
         <td>${Math.round(-(u35_total_goal - total_u35_reached) / u35_total_goal * 100) +"%"}</td>
         <td>${"/"}</td>
         <td>${Math.round(-(fn_total_goal - total_fn_reached) / fn_total_goal * 100) +"%"}</td>
