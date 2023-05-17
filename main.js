@@ -258,7 +258,7 @@ submitButton.addEventListener('click', function() {
             <tr>
                 <td>${member.name}</td>
                 <td>${member.days}</td>
-                <td>${member.hours}</td>
+                <td>${member.hours * member.days}</td>
                 <td>${roundToTwoDecimals(member.u35_goal)}</td>
                 <td>${roundToTwoDecimals(member.ue35_goal)}</td>
                 <td>${roundToTwoDecimals(member.wb_goal)}</td>
@@ -323,7 +323,7 @@ submitButton.addEventListener('click', function() {
             <tr>
                 <td>${member.name}</td>
                 <td>${member.days}</td>
-                <td>${member.hours}</td>
+                <td>${member.hours * member.days}</td>
                 <td>${member.u35_goal}</td>
                 <td>${member.ue35_goal}</td>
                 <td>${member.wb_goal}</td>
@@ -372,7 +372,7 @@ submitButton.addEventListener('click', function() {
         const row = `<tr>
             <td>${member.name}</td>
             <td>${member.days}</td>
-            <td>${member.hours}</td>
+            <td>${member.hours * member.days}</td>
             <td>${member.ue35_goal}</td>
             <td>${member.u35_goal}</td>
             <td>${member.ue35_reached}</td>
