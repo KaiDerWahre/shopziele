@@ -30,42 +30,42 @@ function generateEmployeeForm(employees) {
                       <div>
                           <label for="${employee}_days">Tage:</label>
                           <br>
-                          <input type="number" id="${employee}_days" name="${employee}_days" step="0.1" required>
+                          <input type="number" id="${employee}_days" name="${employee}_days" step="0.1" required min="0" oninput="validity.valid||(value='');">
                       </div>
                       <div>
                           <label for="${employee}_hours">Stunden pro Tag:</label>
                           <br>
-                          <input type="number" id="${employee}_hours" name="${employee}_hours" step="0.1" required>
+                          <input type="number" id="${employee}_hours" name="${employee}_hours" step="0.1" required min="0" oninput="validity.valid||(value='');">
                       </div>
                       <div>
                           <label for="${employee}_u35">U35:</label>
                           <br>
-                          <input type="number" id="${employee}_u35" name="${employee}_u35">
+                          <input type="number" id="${employee}_u35" name="${employee}_u35" min="0" oninput="validity.valid||(value='');">
                       </div>
                       <div>
                           <label for="${employee}_ue35">Ü35:</label>
                           <br>
-                          <input type="number" id="${employee}_ue35" name="${employee}_ue35">
+                          <input type="number" id="${employee}_ue35" name="${employee}_ue35" min="0" oninput="validity.valid||(value='');">
                       </div>
                       <div>
                           <label for="${employee}_wb">WB:</label>
                           <br>
-                          <input type="number" id="${employee}_wb" name="${employee}_wb">
+                          <input type="number" id="${employee}_wb" name="${employee}_wb" min="0" oninput="validity.valid||(value='');">
                       </div>
                       <div>
                           <label for="${employee}_tv">TV:</label>
                           <br>
-                          <input type="number" id="${employee}_tv" name="${employee}_tv">
+                          <input type="number" id="${employee}_tv" name="${employee}_tv" min="0" oninput="validity.valid||(value='');">
                       </div>
                       <div>
                           <label for="${employee}_vvl">VVL:</label>
                           <br>
-                          <input type="number" id="${employee}_vvl" name="${employee}_vvl">
+                          <input type="number" id="${employee}_vvl" name="${employee}_vvl" min="0" oninput="validity.valid||(value='');">
                       </div>
                       <div>
                           <label for="${employee}_fn">FN:</label>
                           <br>
-                          <input type="number" id="${employee}_fn" name="${employee}_fn">
+                          <input type="number" id="${employee}_fn" name="${employee}_fn" min="0" oninput="validity.valid||(value='');">
                       </div>
                   </div>
               </div>`;
